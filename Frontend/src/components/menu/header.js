@@ -185,14 +185,14 @@ const Header = function ({ className }) {
               className="connect-wal btn btn-main"
               onClick={handleShowBarcodeModal}
             >
-              connected
+              Connected
             </button>
           ) : (
             <button
               className="connect-wal btn btn-main"
               onClick={handleShowBarcodeModal}
             >
-              connect Wallet
+              Connect Wallet
             </button>
           )}
           <div

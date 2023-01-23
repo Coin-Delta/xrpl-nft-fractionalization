@@ -42,7 +42,7 @@ const FractionThirdStep = (props) => {
   };
   return (
     <div className="form-box">
-      <h3>Create by offer</h3>
+      <h3>Create buy offer</h3>
 
       <div className="field-set">
         <button

@@ -119,7 +119,7 @@ const Fraction = () => {
       ),
     },
     {
-      label: "Create by offer",
+      label: "Create buy offer",
       component: (
         <FractionThirdStep
           handleFractionalizeState={handleFractionalizeState}
@@ -127,7 +127,7 @@ const Fraction = () => {
       ),
     },
     {
-      label: "Accept by offer",
+      label: "Accept buy offer",
       component: (
         <FractionFourthStep
           handleFractionalizeState={handleFractionalizeState}
@@ -164,7 +164,7 @@ const Fraction = () => {
           </Stepper>
           {activeStep === steps.length && (
             <Paper square elevation={0} sx={{ p: 3 }}>
-              <Typography>Fractioned</Typography>
+              <Typography>Fractionalized</Typography>
             </Paper>
           )}
         </div>

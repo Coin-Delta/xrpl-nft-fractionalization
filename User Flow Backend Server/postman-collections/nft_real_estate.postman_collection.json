@@ -1,0 +1,3039 @@
+{
+	"info": {
+		"_postman_id": "511b276a-0696-4c3c-b618-84f9f4b23414",
+		"name": "SEGMINT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23626531"
+	},
+	"item": [
+		{
+			"name": "login and register",
+			"item": [
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//- auto populates token to environment variables",
+									"pm.test(\"Token returned from login, added to environment.\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"token\");",
+									"    const jsonData = pm.response.json();",
+									"    pm.environment.set('authToken', jsonData.token);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/login",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "5aa1c2c35ef7a4e97b5e995a",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/verify",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "id",
+									"value": "f5b08991-02fc-4f3d-9a32-6d703bef5c57",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/reset",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"reset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/token",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "My Name",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "hello4@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/register",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/forgot",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "en",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/forgot",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"forgot"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profile / Settings",
+			"item": [
+				{
+					"name": "faqs",
+					"item": [
+						{
+							"name": "/faqs/all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/faqs/all",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"faqs",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/faqs",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/faqs?filter=&fields=question&page=1&limit=1&sort=rank&order=1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"faqs"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": ""
+										},
+										{
+											"key": "fields",
+											"value": "question"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "1"
+										},
+										{
+											"key": "sort",
+											"value": "rank"
+										},
+										{
+											"key": "order",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/faqs",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "question",
+											"value": "how are you?",
+											"type": "text"
+										},
+										{
+											"key": "answer",
+											"value": "Fine",
+											"type": "text"
+										},
+										{
+											"key": "isVisible",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "rank",
+											"value": "3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/faqs",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"faqs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/faqs/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "es",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/faqs/6349669a5725e809d8073710",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"faqs",
+										"6349669a5725e809d8073710"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/faqs/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "question",
+											"value": "What is NFT Staking?",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/faqs/6349669a5725e809d8073710?question=how are you?&answer=Fine&isVisible=true&rank=4",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"faqs",
+										"6349669a5725e809d8073710"
+									],
+									"query": [
+										{
+											"key": "question",
+											"value": "how are you?"
+										},
+										{
+											"key": "answer",
+											"value": "Fine"
+										},
+										{
+											"key": "isVisible",
+											"value": "true"
+										},
+										{
+											"key": "rank",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/faqs/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server}}/faqs/6349669a5725e809d8073710",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"faqs",
+										"6349669a5725e809d8073710"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "/profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/profile",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/profile",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "verified",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Harshit",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Sonani",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@admin.co",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "harshit_Sonani",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "Harshit Harshit Sonani",
+									"type": "text"
+								},
+								{
+									"key": "externalProfileLink",
+									"value": "https://www.google.com",
+									"type": "text"
+								},
+								{
+									"key": "twitterProfile",
+									"value": "https://www.twitter.com/harshit_sonani",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/profile",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/profile/changePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "oldPassword",
+									"value": "12345",
+									"type": "text"
+								},
+								{
+									"key": "newPassword",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/profile/changePassword",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"profile",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "SegMint your NFT",
+			"item": [
+				{
+					"name": "/products",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "tokenName",
+									"value": "TOKEN_NAME_105",
+									"type": "text"
+								},
+								{
+									"key": "tokenId",
+									"value": "TOKEN_ID_101",
+									"type": "text"
+								},
+								{
+									"key": "tokenContractAddress",
+									"value": "tokenContractAddress",
+									"type": "text"
+								},
+								{
+									"key": "tokenDescription",
+									"value": "tokenDescription",
+									"type": "text"
+								},
+								{
+									"key": "tokenInstantPrice",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "fractions",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "fractionName",
+									"value": "fractionName",
+									"type": "text"
+								},
+								{
+									"key": "fractionSymbol",
+									"value": "fractionSymbol",
+									"type": "text"
+								},
+								{
+									"key": "productCategory",
+									"value": "productCategory",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/products",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MarketPlace",
+			"item": [
+				{
+					"name": "getExploreProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFeatureArtist",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=FeaturedArtists&fields=productCategory&page=1&limit=500&sort=tokenName&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "FeaturedArtists"
+								},
+								{
+									"key": "fields",
+									"value": "productCategory"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "500"
+								},
+								{
+									"key": "sort",
+									"value": "tokenName"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPlayToEarnAssets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=PlayToEarn&fields=productCategory&page=1&limit=500&sort=tokenName&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "PlayToEarn"
+								},
+								{
+									"key": "fields",
+									"value": "productCategory"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "500"
+								},
+								{
+									"key": "sort",
+									"value": "tokenName"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getLandAssets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=LandAssets&fields=productCategory&page=1&limit=500&sort=tokenName&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "LandAssets"
+								},
+								{
+									"key": "fields",
+									"value": "productCategory"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "500"
+								},
+								{
+									"key": "sort",
+									"value": "tokenName"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getUtilityAssets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=UtilityAssets&fields=productCategory&page=1&limit=500&sort=tokenName&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "UtilityAssets"
+								},
+								{
+									"key": "fields",
+									"value": "productCategory"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "500"
+								},
+								{
+									"key": "sort",
+									"value": "tokenName"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProducts - filter",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=TOKEN_NAME1&fields=tokenName&page=1&limit=5&sort=tokenName&order=1",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "TOKEN_NAME1"
+								},
+								{
+									"key": "fields",
+									"value": "tokenName"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "sort",
+									"value": "tokenName"
+								},
+								{
+									"key": "order",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorites",
+			"item": [
+				{
+					"name": "getAllFavoriteProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/userFavorites?filter=6350361b5296562fb497abc8&fields=userId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userFavorites"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "6350361b5296562fb497abc8"
+								},
+								{
+									"key": "fields",
+									"value": "userId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addFavoriteProductById",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "productId",
+									"value": "63514aba104998403c172e8c",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/userFavorites",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userFavorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "removeFavoriteProductById",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/userFavorites/63514aba104998403c172e8c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userFavorites",
+								"63514aba104998403c172e8c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MyPortfolio",
+			"item": [
+				{
+					"name": "userActivity",
+					"item": [
+						{
+							"name": "/userActivities/all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/userActivities/all",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userActivities",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "userActivities",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "userId",
+											"value": "4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "userName",
+											"value": "Super User",
+											"type": "text"
+										},
+										{
+											"key": "metamaskAddress",
+											"value": "8e89f68218fb3a08ae59bf211cae9db99",
+											"type": "text"
+										},
+										{
+											"key": "metamaskAddressAdded",
+											"value": "2018-03-29T13:34:00.000",
+											"type": "text"
+										},
+										{
+											"key": "metamaskActive",
+											"value": "false",
+											"type": "text"
+										},
+										{
+											"key": "productId",
+											"value": "p1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/userActivities",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userActivities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/userActivities/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "es",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/userActivities/6356d851bee5d329702681f8",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userActivities",
+										"6356d851bee5d329702681f8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/userActivities/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "userId",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "transactionTime",
+											"value": " 2018-03-29T13:34:00.000",
+											"type": "text"
+										},
+										{
+											"key": "transactionType",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "transactionHash",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "userName",
+											"value": " Super",
+											"type": "text"
+										},
+										{
+											"key": "userFrom",
+											"value": " Super One",
+											"type": "text"
+										},
+										{
+											"key": "walletAddress",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "ProductId",
+											"value": " 2",
+											"type": "text"
+										},
+										{
+											"key": "Quantity",
+											"value": " 3",
+											"type": "text"
+										},
+										{
+											"key": "Price",
+											"value": " 200",
+											"type": "text"
+										},
+										{
+											"key": "currency",
+											"value": " newone",
+											"type": "text"
+										},
+										{
+											"key": "stakedQty",
+											"value": " 500",
+											"type": "text"
+										},
+										{
+											"key": "stakedRewards",
+											"value": " 5",
+											"type": "text"
+										},
+										{
+											"key": "stakedTokens",
+											"value": " 4fcf3f738y483838f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "stakedExpiration",
+											"value": " 2021-03-29T13:34:00.000",
+											"type": "text"
+										},
+										{
+											"key": "userEmail",
+											"value": " super@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "createdDate",
+											"value": " 2018-03-29T13:34:00.000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/userActivities/6346b88ab8a70c0a147ac892",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userActivities",
+										"6346b88ab8a70c0a147ac892"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/userActivities/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server}}/userActivities/6346b88ab8a70c0a147ac892",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userActivities",
+										"6346b88ab8a70c0a147ac892"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "getUserActivities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/userActivities?filter=4fcf3f78138f61fe6273dbd1d6c05f15e&fields=userId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userActivities"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "4fcf3f78138f61fe6273dbd1d6c05f15e"
+								},
+								{
+									"key": "fields",
+									"value": "userId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOwnedProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=635262dcc085c90d5c3759e2&fields=userId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "635262dcc085c90d5c3759e2"
+								},
+								{
+									"key": "fields",
+									"value": "userId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCreatedProducts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products?filter=635262dcc085c90d5c3759e2&fields=userId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "635262dcc085c90d5c3759e2"
+								},
+								{
+									"key": "fields",
+									"value": "userId"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "userWallets",
+			"item": [
+				{
+					"name": "/userWallets/all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/userWallets/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userWallets",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userWallets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/userWallets?filter=4fcf3f78138f61fe6273dbd1d6c05f15e&fields=userId",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userWallets"
+							],
+							"query": [
+								{
+									"key": "filter",
+									"value": "4fcf3f78138f61fe6273dbd1d6c05f15e"
+								},
+								{
+									"key": "fields",
+									"value": "userId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userWallets",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "4fcf3f78138f61fe6273dbd1d6c05f15e",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "Super User",
+									"type": "text"
+								},
+								{
+									"key": "metamaskAddress",
+									"value": "8e89f68218fb3a08ae59bf211cae9db99",
+									"type": "text"
+								},
+								{
+									"key": "metamaskAddressAdded",
+									"value": "2018-03-29T13:34:00.000",
+									"type": "text"
+								},
+								{
+									"key": "metamaskActive",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/userWallets",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userWallets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/userWallets/:id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/userWallets/634687a9ca4622173cf3543d",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userWallets",
+								"634687a9ca4622173cf3543d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/userWallets/:id",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "userId",
+									"value": "4fcf3f78138f61fe6273dbd1d6c05f15e",
+									"type": "text"
+								},
+								{
+									"key": "userName",
+									"value": "Super User",
+									"type": "text"
+								},
+								{
+									"key": "metamaskAddress",
+									"value": "8e89f68218fb3a08ae59bf211cae9db99",
+									"type": "text"
+								},
+								{
+									"key": "metamaskAddressAdded",
+									"value": "2018-03-29T13:34:00.000",
+									"type": "text"
+								},
+								{
+									"key": "metamaskActive",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/userWallets/634687a9ca4622173cf3543d",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userWallets",
+								"634687a9ca4622173cf3543d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/userWallets/:id",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{server}}/userWallets/634687a9ca4622173cf3543d",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"userWallets",
+								"634687a9ca4622173cf3543d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "My Collection- Todo 31st",
+			"item": [
+				{
+					"name": "getCollections",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/collections/all",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"collections",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsByCollectionId",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "createCollection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Marketing Dollar",
+									"type": "text"
+								},
+								{
+									"key": "imageurl",
+									"value": "https://www.tei.org/sites/default/files/styles/1920w_x_860h/public/NebraskaImage_small.jpg?itok=dxdvUhed",
+									"type": "text"
+								},
+								{
+									"key": "createdBy",
+									"value": "Tester",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/collections",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"collections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCollection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Sarvesh",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{server}}/collections/6356daf30b84fa68a4b91e8d",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"collections",
+								"6356daf30b84fa68a4b91e8d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCollection/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/collections/6356daf30b84fa68a4b91e8d",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"collections",
+								"6356daf30b84fa68a4b91e8d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "collections/:id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{server}}/collections/6356d4fc11562105ac427c31",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"collections",
+								"6356d4fc11562105ac427c31"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OnClickBuyToken",
+			"item": [
+				{
+					"name": "getProductDetailsById",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							},
+							{
+								"key": "Accept-Language",
+								"value": "es",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{server}}/products/635260ea296f562014cf5a9c",
+							"host": [
+								"{{server}}"
+							],
+							"path": [
+								"products",
+								"635260ea296f562014cf5a9c"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buy NFT Token -todo",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard - todo",
+			"item": [
+				{
+					"name": "getTrendingProducts",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getSellHistory",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getMarketVisitor",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getTopSellers",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getTopBuyers",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderList",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "getOfferProduct",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Extra",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "/users",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/users?filter=ad&fields=name,email&page=1&limit=10&sort=name&order=-1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "ad"
+										},
+										{
+											"key": "fields",
+											"value": "name,email"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										},
+										{
+											"key": "sort",
+											"value": "name"
+										},
+										{
+											"key": "order",
+											"value": "-1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/users",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "New User",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "myemail@email.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "123123",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Bucaramamga",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "Colombia",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/users",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/users/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server}}/users/5aab2443ef417d2d19e6c8f2",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"users",
+										"5aab2443ef417d2d19e6c8f2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/users/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/users/5aa1c2c35ef7a4e97b5e995a",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"users",
+										"5aa1c2c35ef7a4e97b5e995a"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/users/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "New Name",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "new@email.com",
+											"type": "text"
+										},
+										{
+											"key": "role",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "phone",
+											"value": "12345",
+											"type": "text"
+										},
+										{
+											"key": "city",
+											"value": "Cali",
+											"type": "text"
+										},
+										{
+											"key": "country",
+											"value": "Colombia",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3000/users/5aa1c2c35ef7a4e97b5e995a",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"5aa1c2c35ef7a4e97b5e995a"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "id ASC",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "where",
+											"value": "{ 'email' : { startsWith : 'f' } }",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "marketplace",
+					"item": [
+						{
+							"name": "/products/all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/products/all",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"products",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/products?filter=Product&fields=name&page=1&limit=5&sort=name&order=1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"products"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "Product"
+										},
+										{
+											"key": "fields",
+											"value": "name"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "sort",
+											"value": "name"
+										},
+										{
+											"key": "order",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/products/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Seatle2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/products/5bd08db979bbc504c14ebfdd",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"products",
+										"5bd08db979bbc504c14ebfdd"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "id ASC",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "where",
+											"value": "{ 'email' : { startsWith : 'f' } }",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/products/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server}}/products/5b38171b1843d58427c5d6c4",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"products",
+										"5b38171b1843d58427c5d6c4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cities",
+					"item": [
+						{
+							"name": "/cities/all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/cities/all",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"cities",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/cities",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/cities?filter=Bucaramanga&fields=name&page=1&limit=5&sort=name&order=1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"cities"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "Bucaramanga"
+										},
+										{
+											"key": "fields",
+											"value": "name"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "sort",
+											"value": "name"
+										},
+										{
+											"key": "order",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/cities",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Miami",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/cities",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/cities/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "es",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/cities/5bd08db979bbc504c14ebfdd",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"cities",
+										"5bd08db979bbc504c14ebfdd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/cities/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "Seatle2",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/cities/5bd08db979bbc504c14ebfdd",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"cities",
+										"5bd08db979bbc504c14ebfdd"
+									],
+									"query": [
+										{
+											"key": "sort",
+											"value": "id ASC",
+											"disabled": true
+										},
+										{
+											"key": "skip",
+											"value": "3",
+											"disabled": true
+										},
+										{
+											"key": "where",
+											"value": "{ 'email' : { startsWith : 'f' } }",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/cities/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server}}/cities/5b38171b1843d58427c5d6c4",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"cities",
+										"5b38171b1843d58427c5d6c4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "productVaults",
+					"item": [
+						{
+							"name": "/productVaults/all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/productVaults/all",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"productVaults",
+										"all"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productVaults",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/productVaults?filter=Admin&fields=createdBy&page=1&limit=5&sort=name&order=1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"productVaults"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "Admin"
+										},
+										{
+											"key": "fields",
+											"value": "createdBy"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "sort",
+											"value": "name"
+										},
+										{
+											"key": "order",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productVaults",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "nftId",
+											"value": "4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "userId",
+											"value": "8e89f68218fb3a08ae59bf211cae9db99",
+											"type": "text"
+										},
+										{
+											"key": "fractions",
+											"value": "10000",
+											"type": "text"
+										},
+										{
+											"key": "createdBy",
+											"value": "Sonani",
+											"type": "text"
+										},
+										{
+											"key": "createdDate",
+											"value": "2018-03-29T13:34:00.000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/productVaults",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"productVaults"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/productVaults/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "es",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/productVaults/634523938a77a83a841834c1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"productVaults",
+										"634523938a77a83a841834c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/productVaults/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "nftId",
+											"value": "4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "userId",
+											"value": "8e89f68218fb3a08ae59bf211cae9db99",
+											"type": "text"
+										},
+										{
+											"key": "fractions",
+											"value": "20",
+											"type": "text"
+										},
+										{
+											"key": "createdBy",
+											"value": "Admin",
+											"type": "text"
+										},
+										{
+											"key": "createdDate",
+											"value": "2018-03-29T13:35:00.000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/productVaults/634523938a77a83a841834c1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"productVaults",
+										"634523938a77a83a841834c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/productVaults/:id",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{server}}/productVaults/6345203e85af751fd48b9bae",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"productVaults",
+										"6345203e85af751fd48b9bae"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "userFavorites",
+					"item": [
+						{
+							"name": "userFavorites",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/userFavorites?filter=Super&fields=userName&page=1&limit=5&sort=transactionTime&order=1",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userFavorites"
+									],
+									"query": [
+										{
+											"key": "filter",
+											"value": "Super"
+										},
+										{
+											"key": "fields",
+											"value": "userName"
+										},
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "sort",
+											"value": "transactionTime"
+										},
+										{
+											"key": "order",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/userFavorites/:id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "es",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{server}}/userFavorites/6346b88ab8a70c0a147ac892",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userFavorites",
+										"6346b88ab8a70c0a147ac892"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/userFavorites/:id",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{authToken}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/x-www-form-urlencoded"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "userId",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "transactionTime",
+											"value": " 2018-03-29T13:34:00.000",
+											"type": "text"
+										},
+										{
+											"key": "transactionType",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "transactionHash",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "userName",
+											"value": " Super",
+											"type": "text"
+										},
+										{
+											"key": "userFrom",
+											"value": " Super One",
+											"type": "text"
+										},
+										{
+											"key": "walletAddress",
+											"value": " 4fcf3f78138f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "ProductId",
+											"value": " 2",
+											"type": "text"
+										},
+										{
+											"key": "Quantity",
+											"value": " 3",
+											"type": "text"
+										},
+										{
+											"key": "Price",
+											"value": " 200",
+											"type": "text"
+										},
+										{
+											"key": "currency",
+											"value": " newone",
+											"type": "text"
+										},
+										{
+											"key": "stakedQty",
+											"value": " 500",
+											"type": "text"
+										},
+										{
+											"key": "stakedRewards",
+											"value": " 5",
+											"type": "text"
+										},
+										{
+											"key": "stakedTokens",
+											"value": " 4fcf3f738y483838f61fe6273dbd1d6c05f15e",
+											"type": "text"
+										},
+										{
+											"key": "stakedExpiration",
+											"value": " 2021-03-29T13:34:00.000",
+											"type": "text"
+										},
+										{
+											"key": "userEmail",
+											"value": " super@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "createdDate",
+											"value": " 2018-03-29T13:34:00.000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{server}}/userFavorites/6346b88ab8a70c0a147ac892",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"userFavorites",
+										"6346b88ab8a70c0a147ac892"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
