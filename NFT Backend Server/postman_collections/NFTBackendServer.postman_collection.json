@@ -1,0 +1,264 @@
+{
+	"info": {
+		"_postman_id": "c07b8862-f939-4a5c-b13e-4727822812c4",
+		"name": "NFTBackendServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "23286308"
+	},
+	"item": [
+		{
+			"name": "xrplfragmint",
+			"item": [
+				{
+					"name": "wallet",
+					"item": [
+						{
+							"name": "/connectxummwallet",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{server}}/connectxummwallet"
+							},
+							"response": []
+						},
+						{
+							"name": "/resolved",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"uuid\": \"7b20c243-a3f6-42f9-b264-a65331b1d396\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3002/connectxummwallet/resolved"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "nft",
+					"item": [
+						{
+							"name": "/mintxrplnft",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "user_token",
+										"value": "bd07d631-f70a-424a-bd02-cb3cf2de468a",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"flags\": 8,\r\n    \"transferfees\": \"10000\",\r\n    \"uri\": \"https://www.datocms-assets.com/16499/1622710278-image3.png\",\r\n    \"name\": \"Addidas Shoe\",\r\n    \"symbol\": \"ASN\",\r\n    \"external_link\": \"http://localhost:8080?what=beta.fragmint\",\r\n    \"address\": \"rB54DpxuUocnzZfb1NZJPDV9bMqy6eoeRF\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3002/mintxrplnft"
+							},
+							"response": []
+						},
+						{
+							"name": "/getnftdetails",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{server}}/getnftdetails"
+							},
+							"response": []
+						},
+						{
+							"name": "/getnftdetails/of_account",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/getnftdetails/of_account?address=rB54DpxuUocnzZfb1NZJPDV9bMqy6eoeRF",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"getnftdetails",
+										"of_account"
+									],
+									"query": [
+										{
+											"key": "address",
+											"value": "rB54DpxuUocnzZfb1NZJPDV9bMqy6eoeRF"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "/getnftdetails/single",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{server}}/getnftdetails/single?token_id=00082710758403F037C84F291B1C94C7A82140128DEC6CAE44B17C9E00000003",
+									"host": [
+										"{{server}}"
+									],
+									"path": [
+										"getnftdetails",
+										"single"
+									],
+									"query": [
+										{
+											"key": "token_id",
+											"value": "00082710758403F037C84F291B1C94C7A82140128DEC6CAE44B17C9E00000003"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "fractionalize",
+					"item": [
+						{
+							"name": "/getfractionalize_state",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\": \"0559e815-4c33-48ca-80d3-19e5442eeb9e\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{server}}/getfractionalize_state"
+							},
+							"response": []
+						},
+						{
+							"name": "/set_trustline_and_issue_token",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"address\": \"rB54DpxuUocnzZfb1NZJPDV9bMqy6eoeRF\",\r\n    \"token_name\": \"ARS\",\r\n    \"fractions\": \"97\",\r\n    \"nft_token_id\": \"00082710758403F037C84F291B1C94C7A82140128DEC6CAE44B17C9E00000003\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3002/fractionalize/set_trustline_and_issue_token"
+							},
+							"response": []
+						},
+						{
+							"name": "/set_trust_owner",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "user_token",
+										"value": "bd07d631-f70a-424a-bd02-cb3cf2de468a",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\": \"0559e815-4c33-48ca-80d3-19e5442eeb9e\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3002/fractionalize/set_trust_owner"
+							},
+							"response": []
+						},
+						{
+							"name": "/create_buy_offer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\": \"0559e815-4c33-48ca-80d3-19e5442eeb9e\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3002/fractionalize/create_buy_offer"
+							},
+							"response": []
+						},
+						{
+							"name": "/accept_buy_offer",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "user_token",
+										"value": "bd07d631-f70a-424a-bd02-cb3cf2de468a",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"identifier\": \"0559e815-4c33-48ca-80d3-19e5442eeb9e\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:3002/fractionalize/accept_buy_offer"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{server}}/"
+			},
+			"response": []
+		}
+	]
+}
